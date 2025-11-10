@@ -1,0 +1,57 @@
+data binding: v-bind (có thể viết gọn hơn vd :value, :style, :class)
+event binding: v-on (có thể viết gọn hơn vd: @click)
+two way binding: v-model
+computed: going khái niệm useCallback, useMemo trong react, chỉ cập nhật khi những dữ lieu phụ thuộc thay đổi
+v-if, v-else, v-show
+v-for="(item, index) in items"
+
+Vòng đời:
+	+ createApp: beforeCreate() -> created() -> beforeMount() -> mounted()
+-> beforeUpdate -> updated()
+-> beforeUnmount -> Unmounted()
+
+props
+Dữ lieu 1 chiều
+- provider + inject: 
+	+ cung cấp dữ liệu cho các component ở bất cứ đâu có thể sử dụng truy cập
+	+ có thể áp dụng với cả thuộc tính và phương thức
+
+- Giống children trong reactjs, ta sử dụng <slot></slot>
+	+ nếu muốn sử dụng nhiều hơn 1 vị trí, thêm thuộc tính name vd: <slot name="header"></slot> 
+	+ file chứa nó gọi <template v-slot:header></template> hoặc <template #header></template>
+	+ có thể truy cập dựa vào $slot.[tên slot], để trảnh render ra thành phần ronnxg khi bạn ko nhúng header 
+	VD: <header v-if="$slot.header"><slot name="header"></slot></header>
+- <style scoped></style>: style có phạm vi cho coponent đó thôi
+- Dynamic Component: <component :is="selectedComponent"></component>
+- Keep alive
+- teleport: dịch chuyển tới dưới 1 phần tử HTML nào đó
+- props: ['modelValue']
+- emits: ['update:modelValue'] :Khai báo rõ ràng các event mà component sẽ emit, giúp code dễ hiểu, dễ bảo trì.
+- routing:
+	+ setup: npm i --save vue-router@next
+	+ router-view: đóng vai trò là chỗ hiển thị cho component được match theo URL.
+	+ router-link: chuyển hướng trang
+	+ điều hướng trang: this.$router.push('')
+	+ passing params as props
+	+ nested routes: với rested routes thì phải đặt router-view ở route cha.
+	+ name route: {name: 'router name', params: {ten_param: gia_tri}, query: {...}}
+	+ rendering multiple routes with named router views
+	+ Controlling Scroll Behavior: khi bạn nhấp vào 1 link router để chuyển trang và muốn scroll lên trên đầu mà ko muốn bị mắc kẹt ở dưới
+	cấu hình ở router, scrollBehavior() {...}
+	+ navigation guards: 
+		router.beforeEach((to, from, next) => {
+			next();
+		});
+	+ beforeRouteEnter()
+	+ beforeRoteLeave(): viết cho sựu kiện khi đang trong form mà muốn rời trang sẽ có alert thông báo
+	+ meta data: meta: {needsAuth: true}
+- animation: thẻ <transition></transition> tạo animation vs các class .v-enter-from, .v-enter-active, .v-enter-to, .v-leave-from, .v-leave-active, .v-leave-to
+	+ mode="out-in"
+	+ sự kiện @before-enter và @before-leave
+- Vuex:
+	+ What: là 1 thư viện để quản lý global state
+	+ setup: npm i --save vuex@next
+	+ mapGetters
+	+ modules, trong getters chú ý các khái niệm state, getters, rootState, rootGetters
+	+ Mô hình vuex:
+		Components -> Actions -> Mutations -> App-wide, central Data Store/State Store -> Getters -> Components
