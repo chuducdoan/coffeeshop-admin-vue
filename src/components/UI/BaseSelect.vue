@@ -25,7 +25,7 @@
     <!-- Dropdown menu -->
     <div
       v-if="open"
-      class="absolute w-40 rounded-lg border bg-white shadow-lg z-10"
+      class="absolute w-full rounded-lg border bg-white shadow-lg z-10"
     >
       <ul class="dropdown-menu">
         <li
@@ -64,14 +64,26 @@ function select(opt) {
 
 <style scoped>
 .selectbox-custom {
-  background-color: #f5f4f9;
-  height: 35px;
+  background-color: #ffffff;
   width: 100%;
   font-size: 15px;
   color: #777777;
-  border-radius: 5px;
+  border-radius: 8px;
+  border: 1px solid #dbe0e5;
+  padding: 12px;
+  font-size: 14px;
+}
 
-  padding-right: 24px;
+.selectbox-custom:hover {
+  background-color: #f8f9fa;
+}
+
+.selectbox-custom:focus {
+  color: #5b6b79;
+  background-color: #ffffff;
+  border-color: #04a9f5;
+  outline: 0;
+  box-shadow: 0 0 0 2px rgba(4, 169, 245, 0.2);
 }
 
 .selectbox-custom span {
@@ -91,8 +103,9 @@ function select(opt) {
 }
 
 .dropdown-menu li.active {
-  background-color: #e6f4ff;
-  color: #000;
+  background-color: #e5f6fe;
+  color: #04a9f5;
+
   font-weight: 500;
 }
 

@@ -1,7 +1,10 @@
 <template>
-  <button :class="[size, buttonFullWidth, color]">
+  <button v-if="!link" :class="[mode, buttonFullWidth]" class="btn">
     <slot></slot>
   </button>
+  <router-link v-else :to="to" class="btn">
+    <slot></slot>
+  </router-link>
 </template>
 
 <script>
@@ -36,16 +39,25 @@ export default {
 </script>
 
 <style scoped>
-button {
-  padding: 0.75rem 1.5rem;
+.btn {
+  padding: 0.6rem 1.5rem;
   font-family: inherit;
-  background-color: #1b5299;
+  background-color: #04a9f5;
   border: none;
   color: white;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 14px;
+  border-radius: 8px;
+  gap: 4px;
+  transition: all 0.2s ease-out;
+}
+
+.btn:hover {
+  background-color: #0390d0;
+  border-color: #0387c4;
 }
 
 .lg {
@@ -74,5 +86,17 @@ button {
   gap: 10px;
   color: #000;
   font-size: 13.6px;
+}
+
+.outline {
+  color: #39465f;
+  background-color: #fff;
+  border: 1px solid #39465f;
+  outline: none;
+}
+
+.outline:hover {
+  background-color: #39465f;
+  color: #fff;
 }
 </style>

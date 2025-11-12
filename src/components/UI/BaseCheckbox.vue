@@ -1,11 +1,10 @@
 <template>
   <label class="flex items-center cursor-pointer">
     <input
-      type="radio"
-      :value="value"
-      :checked="value === modelValue"
+      type="checkbox"
+      :checked="modelValue"
       class="hidden peer"
-      @change="$emit('update:modelValue', value)"
+      @change="onChange"
     />
     <span class="box-radio w-5 h-5 mr-2 inline-block transition">
       <svg
@@ -26,29 +25,49 @@
         />
       </svg>
     </span>
-    <span class="text-gray-700"><slot></slot></span>
+    <span class="text-checkbox"><slot></slot></span>
   </label>
 </template>
 
 <script setup>
 defineProps({
-  // eslint-disable-next-line
-  modelValue: String,
-  // eslint-disable-next-line
-  value: String,
+  modelValue: {
+    type: Boolean,
+    default: false,
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
 });
-defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue']);
+
+function onChange(event) {
+  emit('update:modelValue', event.target.checked);
+}
 </script>
 
 <style scoped>
 .box-radio {
+  /* background-color: #04a9f5; */
   position: relative;
-  border-radius: 50%;
+  border-radius: 6px;
   border: 1px solid rgba(0, 0, 0, 0.25);
 }
 
 .peer:checked + .box-radio {
   border-color: #04a9f5;
   background: #04a9f5;
+}
+
+.peer:disabled + .box-radio {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.text-checkbox {
+  font-size: 14px;
+  font-weight: 200;
+  color: #39456f;
 }
 </style>

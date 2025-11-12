@@ -127,7 +127,8 @@ export default {
           email: this.form.email,
           password: this.form.password,
         });
-        this.$router.replace('/home');
+        const redirectUrl = '/' + (this.$route.query.redirect || 'home');
+        this.$router.replace(redirectUrl);
         if (this.remember) {
           localStorage.setItem('rememberedEmail', this.form.email);
         } else {

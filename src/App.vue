@@ -11,6 +11,18 @@ export default {
   data() {
     return {};
   },
+  computed: {
+    isAutoLogout() {
+      return this.$store.getters['auth/isAutoLogout'];
+    },
+  },
+  watch: {
+    isAutoLogout(newValue, oldValue) {
+      if (newValue && newValue !== oldValue) {
+        this.$router.replace('/login?');
+      }
+    },
+  },
   created() {
     this.$store.dispatch('auth/tryLogin');
   },

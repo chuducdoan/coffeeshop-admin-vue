@@ -1,18 +1,8 @@
 <template>
-  <div class="container">
+  <div class="wrap-container">
     <div class="left">
       <sidebar></sidebar>
     </div>
-    <div :class="['sidebar-mobile', isSidebarOpen ? 'show' : '']">
-      <sidebar></sidebar>
-    </div>
-
-    <!-- Overlay -->
-    <div
-      v-if="isSidebarOpen"
-      class="fixed inset-0 bg-black bg-opacity-30 z-40 overlay-mobile"
-      @click="closeSidebar"
-    ></div>
 
     <div class="right">
       <the-header></the-header>
@@ -51,49 +41,52 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  display: flex;
-  height: 100vh;
+.wrap-container {
+  background-color: #f4f7fa;
 }
-
-.left,
-.sidebar-mobile {
-  width: 264px;
-  height: 100%;
-  background-color: #1b264f;
+.left {
+  width: 280px;
   overflow-y: auto;
-  flex-shrink: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1026;
+  background-color: #fff;
+  box-shadow: 0px 0px 24px rgba(27, 46, 94, 0.05);
 }
 
 .right {
-  flex-grow: 1;
-  background-color: #d9deef;
-  height: 100%;
-  overflow-y: auto;
+  min-height: calc(100vh - 74px);
+  margin-left: 280px;
+  width: calc(100% - 280px);
+  position: relative;
+  top: 74px;
+  background-color: #f4f7fa;
 }
 
 /* ----- Custom Scrollbar ----- */
-.left::-webkit-scrollbar,
+/* .left::-webkit-scrollbar,
 .right::-webkit-scrollbar {
-  width: 8px; /* độ dày thanh scroll */
+  width: 8px;
 }
 
 .left::-webkit-scrollbar-track,
 .right::-webkit-scrollbar-track {
-  background: #d9deef; /* màu nền track */
+  background: #d9deef;
   border-radius: 8px;
 }
 
 .left::-webkit-scrollbar-thumb,
 .right::-webkit-scrollbar-thumb {
-  background: #1b264f; /* màu thanh cuộn */
+  background: #1b264f;
   border-radius: 8px;
 }
 
 .left::-webkit-scrollbar-thumb:hover,
 .right::-webkit-scrollbar-thumb:hover {
-  background: #ccc; /* hover đậm hơn */
-}
+  background: #ccc;
+} */
 
 /* Firefox */
 .left,
@@ -106,36 +99,7 @@ export default {
   padding: 28px 46px 19px;
 }
 
-.sidebar-mobile {
-  display: none;
-  position: fixed;
-  z-index: 99;
-  top: 0;
-  left: 0;
-  height: 100vh;
-}
-
 .show {
   display: block;
-}
-
-@media (max-width: 1024px) {
-  .left,
-  .sidebar-mobile {
-    width: 194px;
-  }
-  .main-content {
-    padding: 20px 28px 32px;
-  }
-}
-
-@media (max-width: 768px) {
-  .left {
-    display: none;
-  }
-
-  .overlay-mobile {
-    display: block;
-  }
 }
 </style>
